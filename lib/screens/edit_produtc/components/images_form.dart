@@ -63,7 +63,7 @@ class ImagesForm extends StatelessWidget {
                         icon: Icon(
                           Icons.add_a_photo_outlined,
                           color: Theme.of(context).primaryColor.withAlpha(120),
-                          size: 50,
+                          size: 60,
                         ),
                         onPressed: (){
                           showModalBottomSheet(

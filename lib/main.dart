@@ -5,7 +5,6 @@ import 'package:novackatelierlojavirtual/models/product_manager.dart';
 import 'file:///C:/Flutter/novackatelierlojavirtual/lib/models/cart_manager.dart';
 import 'package:novackatelierlojavirtual/screens/address/address_screen.dart';
 import 'package:novackatelierlojavirtual/screens/cart/cart_screen.dart';
-import 'package:novackatelierlojavirtual/screens/checkout/checkout_screen.dart';
 import 'package:novackatelierlojavirtual/screens/edit_produtc/edit_product_screen.dart';
 import 'file:///C:/Flutter/novackatelierlojavirtual/lib/screens/base/base_screen.dart';
 import 'package:novackatelierlojavirtual/screens/login/login_screen.dart';
@@ -81,14 +80,11 @@ class MyApp extends StatelessWidget {
             case '/cart':
               return MaterialPageRoute(
                   builder: (_) => CartScreen(),
+                settings: settings
               );
             case '/address':
               return MaterialPageRoute(
                   builder: (_) => AddressScreen()
-              );
-            case '/checkout':
-              return MaterialPageRoute(
-                  builder: (_) => CheckoutScreen()
               );
             case '/product':
               return MaterialPageRoute(

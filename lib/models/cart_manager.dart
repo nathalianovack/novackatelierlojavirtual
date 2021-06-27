@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:novackatelierlojavirtual/models/order.dart';
 import 'file:///C:/Flutter/novackatelierlojavirtual/lib/models/address.dart';
 import 'file:///C:/Flutter/novackatelierlojavirtual/lib/models/cart_product.dart';
 import 'package:novackatelierlojavirtual/models/user.dart';
@@ -11,7 +13,6 @@ import 'package:novackatelierlojavirtual/models/product.dart';
 
 class CartManager extends ChangeNotifier{
 
-
   List<CartProduct> items = [];
 
   User user;
@@ -21,7 +22,6 @@ class CartManager extends ChangeNotifier{
   num deliveryPrice;
 
   num get totalPrice => productPrices + (deliveryPrice ?? 0);
-
 
   bool _loading = false;
   bool get loading => _loading;
@@ -118,8 +118,6 @@ class CartManager extends ChangeNotifier{
 
   bool get isAddressValid => address != null && deliveryPrice != null;
 
-  //ADDRESS
-
   Future<void> getAddress(String cep) async{
     loading = true;
 
@@ -188,5 +186,106 @@ class CartManager extends ChangeNotifier{
     }
     deliveryPrice = base + dis * km;
     return true;
+  }
+
+  //CHECKOUT
+
+  Future<void> checkout({Function onStockFail}) async{
+    try {
+     await _decrementStock();
+    }catch(e){
+      onStockFail(e);
+      return;
+    }
+
+    //TODO: PROCESSAR PAGAMENTO
+
+    // Gerar o número do pedido
+    final orderId = await _getOrderId();
+
+    //Gerar objeto pedido no firebase
+    final order = Order();
+    order.orderId = orderId.toString();
+
+    //salvar o pedido
+    await order.save();
+
+  }
+
+  Future<int> _getOrderId() async{
+    final ref = firestore.document('aux/ordercounter');
+
+    // ler e escrever valores consistentes no banco de dados.
+  try {
+    final result = await firestore.runTransaction((tx) async {
+      //ler o documento order counter utilizando a transação
+      final doc = await tx.get(ref);
+      //atribuir o valor do pedido a variavel orderId
+      final orderId = doc.data['current'] as int;
+      //atualizar o valor do documento e adicionar mais 1
+      await tx.update(ref, {'current': orderId + 1});
+      return { 'orderId': orderId};
+    });
+    return result['orderId'] as int;
+  } catch(e){
+    debugPrint(e.toString());
+    return Future.error('Falha ao gerar número do pedido, tente novamente!');
+  }
+
+  }
+
+  Future<void> _decrementStock(){
+    // 1. Ler todos os estoques
+    // 2. Decremento localmente os estoques
+    // 3. Salvar os estoques no firebase
+
+   return firestore.runTransaction((tx) async{
+
+      //lista dos produtos que tem estoque
+      final List<Product> productsToUpdate = [];
+      //lista dos produtos que não tem estoque
+      final List<Product> productsWithoutStock = [];
+
+      for(final cartProdutc in items){
+        Product product;
+
+        //verificando se tem produtos iguais no carrinho
+        if(productsToUpdate.any((p) => p.id == cartProdutc.productID)){
+          product = productsToUpdate.firstWhere((p) => p.id == cartProdutc.productID);
+        } else {
+          //pegando a referencia do produto e colocando na variavel doc
+          final doc = await tx.get(firestore.document('products/${cartProdutc.productID}'));
+          //agora tem o produto mais atualizado
+          product = Product.fromDocument(doc);
+        }
+
+        //colocar na tela do carrinho para mostrar qual item não tem estoque.
+        cartProdutc.product = product;
+
+        //obter o objeto tamanho correspondente ao tamanho que está no carrinho
+        final size = product.findSize(cartProdutc.size);
+        //verificar se o tamanho está disponivel no estoque
+        if(size.stock - cartProdutc.quantity < 0){
+          //adicionar o produto correspondente na lista dos produtos sem estoque
+          productsWithoutStock.add(product);
+        } else {
+          //decrementar a quantidade do estoque
+          size.stock -= cartProdutc.quantity;
+          //adicionar o produto correspondente na lista dos produtos com estoque
+          productsToUpdate.add(product);
+        }
+      }
+      
+      if(productsWithoutStock.isNotEmpty){
+        //mostrar qual produto não tem estoque suficiente
+        return Future.error('${productsWithoutStock.length} produtos sem estoque disponível!');
+      }
+
+      for(final product in productsToUpdate){
+        //atualizar cada um dos produtos com os tamanhos atualizados
+        tx.update(firestore.document('products/${product.id}'), {'sizes': product.exportSizeList()});
+      }
+
+    });
   }
 }

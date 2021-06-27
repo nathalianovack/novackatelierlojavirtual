@@ -5,7 +5,7 @@ import 'package:novackatelierlojavirtual/models/product.dart';
 
 class CartProduct extends ChangeNotifier{
 
-  CartProduct.fromProduct(this.product){
+  CartProduct.fromProduct(this._product){
     productID = product.id;
     quantity = 1;
     size = product.selectedSize.name;
@@ -19,7 +19,6 @@ class CartProduct extends ChangeNotifier{
 
     firestore.document('products/$productID').get().then((doc){
       product = Product.fromDocument(doc);
-      notifyListeners();
     });
   }
 
@@ -30,7 +29,12 @@ class CartProduct extends ChangeNotifier{
   int quantity;
   String size;
 
-  Product product;
+  Product _product;
+  Product get product => _product;
+  set product(Product value){
+    _product = value;
+    notifyListeners();
+  }
 
   ItemSize get itemSize{
     if(product == null) return null;
@@ -53,6 +57,15 @@ class CartProduct extends ChangeNotifier{
       'size' : size,
     };
   }
+
+  Future<Map<String, dynamic>> toOrderItemMap() async {
+    return{
+      'pid' : productID,
+      'quantity' : quantity,
+      'size' : size,
+    };
+  }
+
 
   bool stackable(Product product){
     return product.id == productID && product.selectedSize.name == size;

@@ -16,6 +16,7 @@ class PriceCard extends StatelessWidget {
     final productsPrice = cartManager.productPrices;
     final deliveryPrice = cartManager.deliveryPrice;
     final totalPrice = cartManager.totalPrice;
+   // final discount = cartManager.discountPercentage;
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
