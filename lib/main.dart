@@ -62,38 +62,39 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (settings){
           switch(settings.name){
             case '/login':
-              return MaterialPageRoute(
+              return MaterialPageRoute<dynamic>(
                   builder: (_) => LoginScreen()
               );
             case '/edit_product':
-              return MaterialPageRoute(
+              return MaterialPageRoute<dynamic>(
                   builder: (_) => EditProductScreen(settings.arguments as Product)
               );
             case '/signup':
-              return MaterialPageRoute(
+              return MaterialPageRoute<dynamic> (
                   builder: (_) => SignUpScreen()
               );
             case '/select_product':
-              return MaterialPageRoute(
+              return MaterialPageRoute<dynamic>(
                   builder: (_) => SelectProductScreen()
               );
             case '/cart':
-              return MaterialPageRoute(
+              return MaterialPageRoute<dynamic>(
                   builder: (_) => CartScreen(),
                 settings: settings
               );
             case '/address':
-              return MaterialPageRoute(
+              return MaterialPageRoute<dynamic>(
                   builder: (_) => AddressScreen()
               );
             case '/product':
-              return MaterialPageRoute(
+              return MaterialPageRoute<dynamic>(
                   builder: (_) => ProductScreen(settings.arguments as Product)
               );
             case '/base':
             default:
-              return MaterialPageRoute(
+              return MaterialPageRoute<dynamic>(
                   builder: (_) => BaseScreen(),
+                settings: settings
               );
           }
         },

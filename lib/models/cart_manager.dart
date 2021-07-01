@@ -13,6 +13,9 @@ import 'package:novackatelierlojavirtual/models/product.dart';
 
 class CartManager extends ChangeNotifier{
 
+  CartManager cartManager;
+  Order order;
+
   List<CartProduct> items = [];
 
   User user;
@@ -80,6 +83,15 @@ class CartManager extends ChangeNotifier{
     items.removeWhere((p) => p.id == cartProduct.id);
     user.cartReference.document(cartProduct.id).delete();
     cartProduct.removeListener(_onItemUpdated);
+    notifyListeners();
+  }
+
+  //limpando o carrinho após finalizar o pedido
+  void clear(){
+    for(final cartProduct in items){
+      user.cartReference.document(cartProduct.id).delete();
+    }
+    items.clear();
     notifyListeners();
   }
 
@@ -190,11 +202,13 @@ class CartManager extends ChangeNotifier{
 
   //CHECKOUT
 
-  Future<void> checkout({Function onStockFail}) async{
+  Future<void> checkout({Function onStockFail, Function onSuccess}) async{
+    loading = true;
     try {
      await _decrementStock();
     }catch(e){
       onStockFail(e);
+      loading = false;
       return;
     }
 
@@ -204,13 +218,22 @@ class CartManager extends ChangeNotifier{
     final orderId = await _getOrderId();
 
     //Gerar objeto pedido no firebase
+//    final order = Order();
+   // order = Order.fromCartManager(cartManager);
+
     final order = Order();
     order.orderId = orderId.toString();
+
 
     //salvar o pedido
     await order.save();
 
+    await clear();
+
+    onSuccess();
+    loading = false;
   }
+
 
   Future<int> _getOrderId() async{
     final ref = firestore.document('aux/ordercounter');
@@ -223,6 +246,7 @@ class CartManager extends ChangeNotifier{
       //atribuir o valor do pedido a variavel orderId
       final orderId = doc.data['current'] as int;
       //atualizar o valor do documento e adicionar mais 1
+      // ignore: always_specify_types
       await tx.update(ref, {'current': orderId + 1});
       return { 'orderId': orderId};
     });
@@ -278,7 +302,7 @@ class CartManager extends ChangeNotifier{
       
       if(productsWithoutStock.isNotEmpty){
         //mostrar qual produto não tem estoque suficiente
-        return Future.error('${productsWithoutStock.length} produtos sem estoque disponível!');
+        return Future<dynamic>.error('${productsWithoutStock.length} produtos sem estoque disponível!');
       }
 
       for(final product in productsToUpdate){

@@ -52,7 +52,7 @@ class Section extends ChangeNotifier{
   }
 
   Future<void> save(int pos) async{
-    final Map<String, dynamic> data = {
+    final data = {
       'name': name,
       'type': type,
       'pos': pos,
@@ -84,6 +84,7 @@ class Section extends ChangeNotifier{
       }
     }
 
+    // ignore: always_specify_types
     final Map<String, dynamic> itemsData = {
       'items': items.map((e) => e.toMap()).toList()
     };

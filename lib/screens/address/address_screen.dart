@@ -21,15 +21,38 @@ class AddressScreen extends StatelessWidget {
           AddressCard(),
           Consumer<CartManager>(
             builder: (_, cartManager, __){
+              if(cartManager.loading){
+                return Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        ),
+                        const SizedBox(height: 16,),
+                        Text(
+                            'Processando seu Pedido...',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 16,
+                          ),
+                        )
+                      ],
+                    ),
+                );
+              }
               return PriceCard(
                 // finalizar o pedido sem pagamento, porque a tela de pagamento não deu certo.
                 buttonText: 'Finalizar Pedido',
                 onPressed: cartManager.isAddressValid ? () {
-                 // Navigator.of(context).pushNamed('/checkout');
                     cartManager.checkout(
                       //mostrando a tela do carrinho com o produto sem estoque
                       onStockFail: (e){
                         Navigator.of(context).popUntil((route) => route.settings.name == '/cart');
+                      },
+                      onSuccess: (){
+                        Navigator.of(context).popUntil((route) => route.settings.name == '/base');
                       }
                     );
                     } : null

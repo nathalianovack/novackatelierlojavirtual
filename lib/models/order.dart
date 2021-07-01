@@ -3,12 +3,16 @@ import 'package:novackatelierlojavirtual/models/address.dart';
 import 'package:novackatelierlojavirtual/models/cart_manager.dart';
 import 'package:novackatelierlojavirtual/models/cart_product.dart';
 
+import 'cart_product.dart';
+
 class Order {
 
-
+  CartManager cartManager;
+  CartProduct cartProduct;
 
   //construtor para setar o cartManager
-  Order.fromCartManager(CartManager cartManager){
+  // ignore: missing_return
+  Order order (CartManager cartManager){
     items = List.from(cartManager.items);
     price = cartManager.totalPrice;
     userId = cartManager.user.id;
@@ -21,12 +25,13 @@ class Order {
   Future<void> save() async{
     firestore.collection('orders').document(orderId).setData(
           {
-            'items': items.map((e) => e.toOrderItemMap()).toList(),
+            'items': items,
             'price': price,
             'user': userId,
-            'address': address.toMap(),
+            'address': address,
           }
         );
+
   }
 
   //salvar o número do pedido
@@ -43,6 +48,6 @@ class Order {
   //salvar a data que o usuário fez o pedido
   Timestamp date;
 
-  Order({this.orderId, this.items, this.price, this.userId,
+  Order(List<CartProduct> list, {this.orderId, this.items, this.price, this.userId,
       this.address, this.date});
 }

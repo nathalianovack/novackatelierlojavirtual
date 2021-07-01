@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:novackatelierlojavirtual/models/address.dart';
 import 'package:novackatelierlojavirtual/models/item_size.dart';
 import 'package:novackatelierlojavirtual/models/product.dart';
 
 class CartProduct extends ChangeNotifier{
+
+  Address address;
 
   CartProduct.fromProduct(this._product){
     productID = product.id;
@@ -28,6 +31,9 @@ class CartProduct extends ChangeNotifier{
   String productID;
   int quantity;
   String size;
+
+  num fixedPrice;
+
 
   Product _product;
   Product get product => _product;
@@ -59,10 +65,12 @@ class CartProduct extends ChangeNotifier{
   }
 
   Future<Map<String, dynamic>> toOrderItemMap() async {
-    return{
+    // ignore: always_specify_types
+    return {
       'pid' : productID,
       'quantity' : quantity,
       'size' : size,
+      'fixedPrice': fixedPrice ?? unitPrice,
     };
   }
 

@@ -32,14 +32,12 @@ class User {
   Future<void> saveData() async {
     await firestoreRef.setData(toMap());
   }
-  Map<String, dynamic> toMap(){
-    return {
+  Map<String, dynamic> toMap()=> {
       'name': name,
       'email': email,
       if(address != null)
         'address' : address.toMap(),
     };
-  }
 
   void setAddress(Address address) async{
     this.address = address;
