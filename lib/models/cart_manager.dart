@@ -10,11 +10,12 @@ import 'package:novackatelierlojavirtual/models/user_manager.dart';
 import 'package:novackatelierlojavirtual/services/cepaberto_service.dart';
 import 'package:novackatelierlojavirtual/models/product.dart';
 
-
 class CartManager extends ChangeNotifier{
 
   CartManager cartManager;
   Order order;
+
+ // Status status;
 
   List<CartProduct> items = [];
 
@@ -221,16 +222,19 @@ class CartManager extends ChangeNotifier{
 //    final order = Order();
    // order = Order.fromCartManager(cartManager);
 
-    final order = Order();
+    final Order order = Order();
     order.orderId = orderId.toString();
-
+    order.price = totalPrice;
+    order.userId = user.id;
+    //order.status = status;
+    order.status = 1;
 
     //salvar o pedido
     await order.save();
 
     await clear();
 
-    onSuccess();
+    onSuccess(order);
     loading = false;
   }
 
@@ -247,7 +251,7 @@ class CartManager extends ChangeNotifier{
       final orderId = doc.data['current'] as int;
       //atualizar o valor do documento e adicionar mais 1
       // ignore: always_specify_types
-      await tx.update(ref, {'current': orderId + 1});
+      await tx.update(ref, <String, dynamic>{'current': orderId + 1});
       return { 'orderId': orderId};
     });
     return result['orderId'] as int;
@@ -307,7 +311,7 @@ class CartManager extends ChangeNotifier{
 
       for(final product in productsToUpdate){
         //atualizar cada um dos produtos com os tamanhos atualizados
-        tx.update(firestore.document('products/${product.id}'), {'sizes': product.exportSizeList()});
+        tx.update(firestore.document('products/${product.id}'), <String, dynamic>{'sizes': product.exportSizeList()});
       }
 
     });

@@ -23,13 +23,11 @@ class ItemSize {
     );
   }
 
-  Map<String, dynamic> toMap(){
-    return{
+  Map<String, dynamic> toMap()=> <String, dynamic>{
       'name': name,
       'stock': stock,
       'price': price,
     };
-  }
 
   @override
   String toString() {

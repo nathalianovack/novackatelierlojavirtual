@@ -11,7 +11,7 @@ class CustomDrawer extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                colors: [const Color.fromARGB(208, 219, 144, 160),
                Colors.white,
@@ -25,21 +25,21 @@ class CustomDrawer extends StatelessWidget {
             children: <Widget>[
               CustomDrawerHeader(),
               const Divider(),
-              DrawerTile(
+              const DrawerTile(
                 iconData: Icons.home_outlined,
                 title: 'Inicio',
                 page: 0,),
-              DrawerTile(
+              const DrawerTile(
                 iconData: Icons.format_list_bulleted_outlined,
                 title: 'Produtos',
                 page: 1,),
-              DrawerTile(
+              const DrawerTile(
                 iconData: Icons.shopping_bag_outlined,
                 title: 'Meus Pedidos',
                 page: 2,),
-              DrawerTile(
-                iconData: Icons.location_on,
-                title: 'Loja',
+              const DrawerTile(
+                iconData: Icons.contact_support_outlined,
+                title: 'Contatos',
                 page: 3  ,
               ),
               //habilitando itens de adminitradores do app
@@ -49,13 +49,13 @@ class CustomDrawer extends StatelessWidget {
                     return Column(
                       children: <Widget>[
                         const Divider(),
-                        DrawerTile(
+                        const DrawerTile(
                           iconData: Icons.people_alt_outlined,
                           title: 'Usuários',
                           page: 4,),
-                        DrawerTile(
-                          iconData: Icons.fact_check_outlined,
-                          title: 'Pedidos',
+                        const DrawerTile(
+                          iconData: Icons.analytics_outlined,
+                          title: 'Painel Pedidos',
                           page: 5  ,
                         ),
                       ],

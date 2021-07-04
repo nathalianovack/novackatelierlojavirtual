@@ -56,7 +56,18 @@ class ProductListTile extends StatelessWidget {
                           fontWeight: FontWeight.w800,
                           color: Theme.of(context).primaryColor
                         ),
-                      )
+                      ),
+                      if(!product.hasStock)
+                        const Padding(
+                          padding: EdgeInsets.only(top: 2),
+                          child: Text(
+                              'Sem estoque disponível',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 12
+                            ),
+                          ),
+                        )
                     ],
                   ))
             ],

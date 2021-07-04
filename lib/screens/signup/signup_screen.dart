@@ -153,7 +153,7 @@ class SignUpScreen extends StatelessWidget {
                                         // TODO: POP
                                         Navigator.of(context).pop();
                                       },
-                                      onFail: (e){
+                                      onFail: (String e){
                                         scaffoldKey.currentState.showSnackBar(
                                             SnackBar(
                                               content: Text('Falha ao cadastrar: $e'),

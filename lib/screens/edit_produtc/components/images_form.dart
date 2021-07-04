@@ -14,7 +14,7 @@ class ImagesForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormField<List<dynamic>>(
-      initialValue: List.from(product.images),
+      initialValue: List<dynamic>.from(product.images),
       validator: (images){
         if(images.isEmpty)
           return 'Insira uma imagem!';
@@ -34,7 +34,7 @@ class ImagesForm extends StatelessWidget {
             AspectRatio(
                 aspectRatio: 1,
                 child: Carousel(
-                  images: state.value.map<Widget>((image){
+                  images: state.value.map<Widget>((dynamic image){
                     return Stack(
                       fit: StackFit.expand,
                       children: <Widget>[
@@ -66,7 +66,7 @@ class ImagesForm extends StatelessWidget {
                           size: 60,
                         ),
                         onPressed: (){
-                          showModalBottomSheet(
+                          showModalBottomSheet <void>(
                               context: context,
                               builder: (_) => ImageSourceSheet(
                                 onImageSelected: onImageSelected,

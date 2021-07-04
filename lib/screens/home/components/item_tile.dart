@@ -29,7 +29,7 @@ class ItemTile extends StatelessWidget {
         }
       },
       onLongPress: homeManager.editing ? (){
-        showDialog(
+        showDialog <void>(
             context: context,
             builder: (_) {
               final product = context.read<ProductManager>().findProductById(item.product);

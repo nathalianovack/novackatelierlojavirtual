@@ -18,7 +18,7 @@ class Product extends ChangeNotifier{
     name = document['name'] as String;
     description = document['description'] as String;
     images = List<String>.from(document.data['images'] as List<dynamic>);
-    sizes = (document.data['sizes'] as List<dynamic> ?? []).map((s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
+    sizes = (document.data['sizes'] as List<dynamic> ?? <void>[]).map((s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
 
   }
 
@@ -66,7 +66,7 @@ class Product extends ChangeNotifier{
   num get basePrice{
     num lowest = double.infinity;
     for(final size in sizes){
-      if(size.price < lowest && size.hasStock)
+      if(size.price < lowest)
         lowest = size.price;
     }
     return lowest;
@@ -87,7 +87,7 @@ class Product extends ChangeNotifier{
   Future<void> save() async{
     loading = true;
 
-    final Map<String,dynamic> data = {
+    final Map<String,dynamic> data = <String, dynamic>{
       'name': name,
       'description' : description,
       'sizes': exportSizeList(),
@@ -134,7 +134,7 @@ class Product extends ChangeNotifier{
       }
     }
     //update das imagens atualizadas.
-    await firestoreRef.updateData({'images': updateImages});
+    await firestoreRef.updateData(<String, dynamic>{'images': updateImages});
 
     images = updateImages;
 

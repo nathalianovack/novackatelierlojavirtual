@@ -17,7 +17,7 @@ class Section extends ChangeNotifier{
     name = document.data['name'] as String;
     type = document.data['type'] as String;
     //transformar o dinamico em uma lista
-    items = (document.data['items'] as List).map((i) => SectionItem.fromMap(i as Map<String, dynamic>)).toList();
+    items = (document.data['items'] as List).map((dynamic i) => SectionItem.fromMap(i as Map<String, dynamic>)).toList();
   }
 
   final Firestore firestore = Firestore.instance;
@@ -85,7 +85,7 @@ class Section extends ChangeNotifier{
     }
 
     // ignore: always_specify_types
-    final Map<String, dynamic> itemsData = {
+    final Map<String, dynamic> itemsData = <String, dynamic>{
       'items': items.map((e) => e.toMap()).toList()
     };
 

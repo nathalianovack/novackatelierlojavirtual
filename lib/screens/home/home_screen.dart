@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                         return PopupMenuButton(
                           elevation: 80,
                           color: Theme.of(context).primaryColor,
-                          onSelected: (e){
+                          onSelected: (String e){
                             if(e == 'Salvar'){
                               homeManager.saveEditing();
                             } else {

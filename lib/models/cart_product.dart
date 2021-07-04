@@ -25,6 +25,18 @@ class CartProduct extends ChangeNotifier{
     });
   }
 
+  CartProduct.fromMap(Map<String, dynamic> map){
+    productID = map['pid'] as String;
+    quantity = map['quantity'] as int;
+    size = map['size'] as String;
+    fixedPrice = map['fixedPrice'] as num;
+
+    firestore.document('products/$productID').get().then((doc){
+      product = Product.fromDocument(doc);
+    });
+
+  }
+
   final Firestore firestore = Firestore.instance;
 
   String id;
@@ -56,23 +68,18 @@ class CartProduct extends ChangeNotifier{
     return itemSize?.price ?? 0;
   }
 
-  Map<String, dynamic> toCartItemMap(){
-    return{
+  Map<String, dynamic> toCartItemMap()=> <String, dynamic>{
       'pid' : productID,
       'quantity' : quantity,
       'size' : size,
     };
-  }
 
-  Future<Map<String, dynamic>> toOrderItemMap() async {
-    // ignore: always_specify_types
-    return {
+  Future<Map<String, dynamic>> toOrderItemMap() async => <String, dynamic>{
       'pid' : productID,
       'quantity' : quantity,
       'size' : size,
       'fixedPrice': fixedPrice ?? unitPrice,
     };
-  }
 
 
   bool stackable(Product product){

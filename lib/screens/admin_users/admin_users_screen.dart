@@ -1,7 +1,9 @@
 import 'package:alphabet_list_scroll_view/alphabet_list_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:novackatelierlojavirtual/common/custom_drawer/custom_drawer.dart';
+import 'package:novackatelierlojavirtual/models/admin_orders_manager.dart';
 import 'package:novackatelierlojavirtual/models/admins_user_manager.dart';
+import 'package:novackatelierlojavirtual/models/page_manager.dart';
 import 'package:provider/provider.dart';
 
 class AdminUsersScreen extends StatelessWidget {
@@ -33,6 +35,12 @@ class AdminUsersScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
           ),
+                onTap: (){
+                  context.read<AdminOrdersManager>().setUserFilter(
+                    adminUsersManager.users[index]
+                  );
+                  context.read<PageManager>().setPage(5);
+                },
               );
           },
             highlightTextStyle: TextStyle(

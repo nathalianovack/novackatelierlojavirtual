@@ -79,7 +79,7 @@ class HomeManager extends ChangeNotifier{
       pos++;
     }
     
-    for(final section in List.from(_sections)){
+    for(final section in List<dynamic>.from(_sections)){
       if(!_editingSections.any((element) => element.id == section.id)){
         await section.delete();
       }

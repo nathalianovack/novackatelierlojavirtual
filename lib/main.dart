@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:novackatelierlojavirtual/models/admin_orders_manager.dart';
 import 'package:novackatelierlojavirtual/models/admins_user_manager.dart';
 import 'package:novackatelierlojavirtual/models/home_manager.dart';
+import 'package:novackatelierlojavirtual/models/order.dart';
+import 'package:novackatelierlojavirtual/models/orders_manager.dart';
 import 'package:novackatelierlojavirtual/models/product_manager.dart';
 import 'file:///C:/Flutter/novackatelierlojavirtual/lib/models/cart_manager.dart';
 import 'package:novackatelierlojavirtual/screens/address/address_screen.dart';
 import 'package:novackatelierlojavirtual/screens/cart/cart_screen.dart';
+import 'package:novackatelierlojavirtual/screens/confirmation/confirmation_screen.dart';
 import 'package:novackatelierlojavirtual/screens/edit_produtc/edit_product_screen.dart';
 import 'file:///C:/Flutter/novackatelierlojavirtual/lib/screens/base/base_screen.dart';
 import 'package:novackatelierlojavirtual/screens/login/login_screen.dart';
@@ -37,6 +41,11 @@ class MyApp extends StatelessWidget {
           lazy: false,
           update: (_, userManager, cartManager) => cartManager..updateUser(userManager),
         ),
+        ChangeNotifierProxyProvider<UserManager, OrdersManager> (
+          create: (_) => OrdersManager(),
+          lazy: false,
+          update: (_, userManager, ordersManager) => ordersManager..updateUser(userManager.user),
+        ),
         ChangeNotifierProvider(
           create: (_) => HomeManager(),
           lazy: false,
@@ -45,6 +54,11 @@ class MyApp extends StatelessWidget {
           create: (_) => AdminUsersManager(),
           lazy: false,
           update: (_, userManager, adminUsersManager) => adminUsersManager..updateUser(userManager),
+        ),
+        ChangeNotifierProxyProvider<UserManager, AdminOrdersManager>(
+          create: (_) => AdminOrdersManager(),
+          lazy: false,
+            update: (_, userManager, adminOrdersManager) => adminOrdersManager..updateAdmin(adminEnabled: userManager.adminEnabled),
         )
       ],
       child: MaterialApp(
@@ -58,7 +72,6 @@ class MyApp extends StatelessWidget {
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: '/base',
         onGenerateRoute: (settings){
           switch(settings.name){
             case '/login':
@@ -77,6 +90,10 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute<dynamic>(
                   builder: (_) => SelectProductScreen()
               );
+            case '/confirmation':
+              return MaterialPageRoute<dynamic>(
+                  builder: (_) => ConfirmationScreen(settings.arguments as Order)
+              );
             case '/cart':
               return MaterialPageRoute<dynamic>(
                   builder: (_) => CartScreen(),
@@ -90,7 +107,7 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute<dynamic>(
                   builder: (_) => ProductScreen(settings.arguments as Product)
               );
-            case '/base':
+            case '/':
             default:
               return MaterialPageRoute<dynamic>(
                   builder: (_) => BaseScreen(),

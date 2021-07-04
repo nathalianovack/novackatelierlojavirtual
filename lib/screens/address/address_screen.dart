@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:novackatelierlojavirtual/common/price_card.dart';
+import 'package:novackatelierlojavirtual/models/order.dart';
+import 'package:novackatelierlojavirtual/models/page_manager.dart';
 import 'file:///C:/Flutter/novackatelierlojavirtual/lib/models/cart_manager.dart';
 import 'package:novackatelierlojavirtual/screens/address/components/address_card.dart';
 import 'package:provider/provider.dart';
@@ -48,11 +50,12 @@ class AddressScreen extends StatelessWidget {
                 onPressed: cartManager.isAddressValid ? () {
                     cartManager.checkout(
                       //mostrando a tela do carrinho com o produto sem estoque
-                      onStockFail: (e){
+                      onStockFail: (String e){
                         Navigator.of(context).popUntil((route) => route.settings.name == '/cart');
                       },
-                      onSuccess: (){
-                        Navigator.of(context).popUntil((route) => route.settings.name == '/base');
+                      onSuccess: (Order order){
+                        Navigator.of(context).popUntil((route) => route.settings.name == '/');
+                        Navigator.of(context).pushNamed('/confirmation', arguments: order);
                       }
                     );
                     } : null

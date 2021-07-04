@@ -24,8 +24,7 @@ class Address {
     long = map['long'] as double;
   }
 
-  Map<String, dynamic> toMap() {
-    return {
+  Map<String, dynamic> toMap() => <String, dynamic>{
       'street': street,
       'number': number,
       'complement': complement,
@@ -36,5 +35,4 @@ class Address {
       'lat': lat,
       'long': long,
     };
-  }
 }
