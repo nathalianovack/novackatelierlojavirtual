@@ -6,10 +6,10 @@ import 'package:novackatelierlojavirtual/models/page_manager.dart';
 import 'package:novackatelierlojavirtual/models/user_manager.dart';
 import 'package:novackatelierlojavirtual/screens/admin_orders/admin_orders_screen.dart';
 import 'package:novackatelierlojavirtual/screens/admin_users/admin_users_screen.dart';
-import 'package:novackatelierlojavirtual/screens/contacts/contact_screen.dart';
 import 'package:novackatelierlojavirtual/screens/home/home_screen.dart';
 import 'package:novackatelierlojavirtual/screens/orders/orders_screen.dart';
 import 'package:novackatelierlojavirtual/screens/products/products_screen.dart';
+import 'package:novackatelierlojavirtual/screens/stores/stores_screen.dart';
 import 'package:provider/provider.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -41,7 +41,7 @@ class _BaseScreenState extends State<BaseScreen> {
               HomeScreen(),
               ProductsScreen(),
               OrdersScreen(),
-              ContactScreen(),
+              StoresScreen(),
               //verificando se o usuário é administrador
               if(userManager.adminEnabled)
                 ...[

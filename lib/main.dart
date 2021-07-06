@@ -5,6 +5,7 @@ import 'package:novackatelierlojavirtual/models/home_manager.dart';
 import 'package:novackatelierlojavirtual/models/order.dart';
 import 'package:novackatelierlojavirtual/models/orders_manager.dart';
 import 'package:novackatelierlojavirtual/models/product_manager.dart';
+import 'package:novackatelierlojavirtual/models/stores_manager.dart';
 import 'file:///C:/Flutter/novackatelierlojavirtual/lib/models/cart_manager.dart';
 import 'package:novackatelierlojavirtual/screens/address/address_screen.dart';
 import 'package:novackatelierlojavirtual/screens/cart/cart_screen.dart';
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => HomeManager(),
           lazy: false,
+        ),
+        ChangeNotifierProvider(
+            create: (_) => StoresManager()
         ),
         ChangeNotifierProxyProvider<UserManager, AdminUsersManager>(
           create: (_) => AdminUsersManager(),

@@ -20,7 +20,6 @@ class AddressScreen extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          AddressCard(),
           Consumer<CartManager>(
             builder: (_, cartManager, __){
               if(cartManager.loading){
@@ -28,7 +27,7 @@ class AddressScreen extends StatelessWidget {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        CircularProgressIndicator(
+                        const CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(Colors.white),
                         ),
                         const SizedBox(height: 16,),
@@ -44,22 +43,27 @@ class AddressScreen extends StatelessWidget {
                     ),
                 );
               }
-              return PriceCard(
-                // finalizar o pedido sem pagamento, porque a tela de pagamento não deu certo.
-                buttonText: 'Finalizar Pedido',
-                onPressed: cartManager.isAddressValid ? () {
-                    cartManager.checkout(
-                      //mostrando a tela do carrinho com o produto sem estoque
-                      onStockFail: (String e){
-                        Navigator.of(context).popUntil((route) => route.settings.name == '/cart');
-                      },
-                      onSuccess: (Order order){
-                        Navigator.of(context).popUntil((route) => route.settings.name == '/');
-                        Navigator.of(context).pushNamed('/confirmation', arguments: order);
-                      }
-                    );
-                    } : null
-                  );
+              return Column(
+                children: [
+                  AddressCard(),
+                  PriceCard(
+                    // finalizar o pedido sem pagamento, porque a tela de pagamento não deu certo.
+                    buttonText: 'Finalizar Pedido',
+                    onPressed: cartManager.isAddressValid ? () {
+                        cartManager.checkout(
+                          //mostrando a tela do carrinho com o produto sem estoque
+                          onStockFail: (String e){
+                            Navigator.of(context).popUntil((route) => route.settings.name == '/cart');
+                          },
+                          onSuccess: (Order order){
+                            Navigator.of(context).popUntil((route) => route.settings.name == '/');
+                            Navigator.of(context).pushNamed('/confirmation', arguments: order);
+                          }
+                        );
+                        } : null
+                      ),
+                ],
+              );
                 }
               )
             ],

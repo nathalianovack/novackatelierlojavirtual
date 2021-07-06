@@ -39,7 +39,7 @@ class OrderTile extends StatelessWidget {
                   fontSize: 14,
                 ),
             ),
-          ],
+              ],
         ),
             Text(
               'Acompanhe o Status do Pedido',

@@ -64,7 +64,7 @@ class ConfirmationScreen extends StatelessWidget {
                     const SizedBox(height: 8,),
                     Center(
                       child: Text(
-                        'Qualquer dúvida entre em contato conosco!',
+                        'Qualquer dúvida entre em contato!',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           color: Theme.of(context).primaryColor.withAlpha(200),

@@ -55,7 +55,7 @@ class CustomDrawer extends StatelessWidget {
                           page: 4,),
                         const DrawerTile(
                           iconData: Icons.analytics_outlined,
-                          title: 'Painel Pedidos',
+                          title: 'Painel de Pedidos',
                           page: 5  ,
                         ),
                       ],

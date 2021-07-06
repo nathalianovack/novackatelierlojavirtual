@@ -66,6 +66,8 @@ class Order {
 //formatar o número do pedido na página Meus pedidos
   String get formattedId => '#${orderId.padLeft(6, '0')}';
 
+  String get formattedDate => '';
+
   Order(
       {
         this.orderId,
