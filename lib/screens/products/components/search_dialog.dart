@@ -29,10 +29,10 @@ class SearchDialog extends StatelessWidget {
                   },
                 )
               ),
+              cursorColor: Colors.brown,
               onFieldSubmitted: (text){
                 Navigator.of(context).pop(text);
               },
-
             ),
           ),
         )

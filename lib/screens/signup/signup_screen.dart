@@ -50,7 +50,14 @@ class SignUpScreen extends StatelessWidget {
                             ),hintStyle: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
-                            )),
+                            ),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.brown
+                                    )
+                                )
+                            ),
+                            cursorColor: Colors.brown,
                             enabled: !userManager.loading,
                             validator: (name){
                               if(name.isEmpty)
@@ -70,7 +77,14 @@ class SignUpScreen extends StatelessWidget {
                             ),hintStyle: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
-                            )),
+                            ),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.brown
+                                    )
+                                )
+                            ),
+                            cursorColor: Colors.brown,
                             enabled: !userManager.loading,
                             keyboardType: TextInputType.emailAddress,
                             validator: (email){
@@ -91,7 +105,14 @@ class SignUpScreen extends StatelessWidget {
                             ),hintStyle: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
-                            )),
+                            ),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.brown
+                                    )
+                                )
+                            ),
+                            cursorColor: Colors.brown,
                             enabled: !userManager.loading,
                             obscureText: true,
                             validator: (pass){
@@ -112,7 +133,14 @@ class SignUpScreen extends StatelessWidget {
                             ),hintStyle: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
-                            )),
+                            ),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.brown
+                                    )
+                                )
+                            ),
+                            cursorColor: Colors.brown,
                             enabled: !userManager.loading,
                             obscureText: true,
                             validator: (pass){

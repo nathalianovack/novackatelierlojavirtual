@@ -54,7 +54,14 @@ class LoginScreen extends StatelessWidget {
                           ),hintStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
-                          )),
+                          ),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.brown
+                                  )
+                              )
+                          ),
+                      cursorColor: Colors.brown,
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
                           validator: (email){
@@ -74,7 +81,14 @@ class LoginScreen extends StatelessWidget {
                           ),hintStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
-                          )),
+                          ),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.brown
+                                  )
+                              )
+                          ),
+                          cursorColor: Colors.brown,
                           autocorrect: false,
                           obscureText: true,
                           validator: (pass){
@@ -165,7 +179,7 @@ class LoginScreen extends StatelessWidget {
                       child: const Text(
                           'Esqueci minha senha',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.transparent,
                         ),
                       ),
                     ),

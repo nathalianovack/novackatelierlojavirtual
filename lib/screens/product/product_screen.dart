@@ -53,7 +53,7 @@ class ProductScreen extends StatelessWidget {
                   dotSize: 4,
                   dotSpacing: 15,
                   dotPosition: DotPosition.bottomCenter,
-                  dotBgColor: Colors.transparent,
+                  dotBgColor: Colors.white,
                   dotColor: primaryColor,
                   autoplay: false,
             )

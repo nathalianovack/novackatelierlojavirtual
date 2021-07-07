@@ -21,8 +21,15 @@ class EditItemSize extends StatelessWidget {
           initialValue: size.name,
             decoration: const InputDecoration(
               labelText: 'Tamanho',
+                labelStyle: TextStyle(color: Colors.black87),
               isDense: true,
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.brown
+                    )
+                )
             ),
+            cursorColor: Colors.brown,
             validator: (name){
             if(name.isEmpty)
               return 'Inválido';
@@ -38,8 +45,15 @@ class EditItemSize extends StatelessWidget {
           initialValue: size.stock?.toString(),
             decoration: const InputDecoration(
               labelText: 'Estoque',
+                labelStyle: TextStyle(color: Colors.black87),
               isDense: true,
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.brown
+                    )
+                )
             ),
+            cursorColor: Colors.brown,
             validator: (stock){
             if(int.tryParse(stock) == null || stock.isEmpty)
               return 'Inválido';
@@ -56,9 +70,17 @@ class EditItemSize extends StatelessWidget {
           initialValue: size.price?.toStringAsFixed(2),
             decoration: const InputDecoration(
               labelText: 'Preço',
+              labelStyle: TextStyle(color: Colors.black87),
               isDense: true,
-              prefixText: 'R\$  '
+              prefixText: 'R\$  ',
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.brown
+                    )
+                )
             ),
+            cursorColor: Colors.brown,
+
             onChanged: (price) => size.price = num.tryParse(price),
             validator: (price){
             if(num.tryParse(price) == null || price.isEmpty)

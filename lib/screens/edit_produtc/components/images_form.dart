@@ -79,7 +79,7 @@ class ImagesForm extends StatelessWidget {
                   dotSize: 4,
                   dotSpacing: 16,
                   dotPosition: DotPosition.bottomCenter,
-                  dotBgColor: Colors.transparent,
+                  dotBgColor: Colors.white,
                   dotColor: Theme.of(context).primaryColor,
                   autoplay: false,
                 )

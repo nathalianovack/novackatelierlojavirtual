@@ -48,7 +48,13 @@ class EditProductScreen extends StatelessWidget {
                             color: Colors.grey,
                             fontStyle: FontStyle.italic,
                           ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.brown
+                              )
+                          )
                       ),
+                  cursorColor: Colors.brown,
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w600
@@ -100,7 +106,13 @@ class EditProductScreen extends StatelessWidget {
                           color: Colors.grey,
                           fontStyle: FontStyle.italic,
                         ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.brown
+                              )
+                          )
                       ),
+                      cursorColor: Colors.brown,
                       maxLines: null,
                       validator: (desc){
                         if(desc.length < 6 )

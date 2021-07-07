@@ -30,10 +30,17 @@ class AddressInputField extends StatelessWidget {
             isDense: true,
             labelText: 'Rua/Avenida',
             hintText: 'Rua XV de Novembro',
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.brown
+                  )
+              )
           ),
+          cursorColor: Colors.brown,
           validator: emptyValidator,
           onSaved: (t) => address.street = t,
         ),
+
         Row(
           children: <Widget>[
             Expanded(
@@ -44,7 +51,13 @@ class AddressInputField extends StatelessWidget {
                   isDense: true,
                   labelText: 'Número',
                   hintText: '123',
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.brown
+                    )
+                  )
                 ),
+                cursorColor: Colors.brown,
                 inputFormatters: [ WhitelistingTextInputFormatter.digitsOnly],
                 keyboardType: TextInputType.number,
                 validator: emptyValidator,
@@ -60,7 +73,13 @@ class AddressInputField extends StatelessWidget {
                   isDense: true,
                   labelText: 'Complemento',
                   hintText: 'Opcional',
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.brown
+                        )
+                    )
                 ),
+                cursorColor: Colors.brown,
                 onSaved: (t) => address.complement = t,
               ),
             ),
@@ -73,7 +92,13 @@ class AddressInputField extends StatelessWidget {
             isDense: true,
             labelText: 'Bairro',
             hintText: 'Centro',
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.brown
+                  )
+              )
           ),
+          cursorColor: Colors.brown,
           validator: emptyValidator,
           onSaved: (t) => address.district = t,
         ),
@@ -88,7 +113,13 @@ class AddressInputField extends StatelessWidget {
                   isDense: true,
                   labelText: 'Cidade',
                   hintText: 'Curitiba',
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.brown
+                        )
+                    )
                 ),
+                cursorColor: Colors.brown,
                 validator: emptyValidator,
                 onSaved: (t) => address.city = t,
               ),
@@ -105,7 +136,13 @@ class AddressInputField extends StatelessWidget {
                   labelText: 'Estado',
                   hintText: 'PR',
                   counterText: '',
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.brown
+                        )
+                    )
                 ),
+                cursorColor: Colors.brown,
                 maxLength: 2,
                 validator: (e){
                   if(e.isEmpty){
