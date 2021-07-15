@@ -15,16 +15,17 @@ class AddressScreen extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('Entrega'),
+        title: const Text('Finalização do Pedido'),
         centerTitle: true,
       ),
       body: ListView(
         children: <Widget>[
           Consumer<CartManager>(
             builder: (_, cartManager, __){
-              if(cartManager.loading){
+              if(cartManager.loading && cartManager.isAddressValid){
                 return Center(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         const CircularProgressIndicator(

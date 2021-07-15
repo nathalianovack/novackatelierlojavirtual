@@ -29,6 +29,7 @@ class AddressInputField extends StatelessWidget {
           decoration: const InputDecoration(
             isDense: true,
             labelText: 'Rua/Avenida',
+            labelStyle: TextStyle(color: Colors.black87),
             hintText: 'Rua XV de Novembro',
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -50,6 +51,7 @@ class AddressInputField extends StatelessWidget {
                 decoration: const InputDecoration(
                   isDense: true,
                   labelText: 'Número',
+                    labelStyle: TextStyle(color: Colors.black87),
                   hintText: '123',
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -72,6 +74,7 @@ class AddressInputField extends StatelessWidget {
                 decoration: const InputDecoration(
                   isDense: true,
                   labelText: 'Complemento',
+                    labelStyle: TextStyle(color: Colors.black87),
                   hintText: 'Opcional',
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -91,6 +94,7 @@ class AddressInputField extends StatelessWidget {
           decoration: const InputDecoration(
             isDense: true,
             labelText: 'Bairro',
+              labelStyle: TextStyle(color: Colors.black87),
             hintText: 'Centro',
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -112,6 +116,7 @@ class AddressInputField extends StatelessWidget {
                 decoration: const InputDecoration(
                   isDense: true,
                   labelText: 'Cidade',
+                    labelStyle: TextStyle(color: Colors.black87),
                   hintText: 'Curitiba',
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -134,6 +139,7 @@ class AddressInputField extends StatelessWidget {
                 decoration: const InputDecoration(
                   isDense: true,
                   labelText: 'Estado',
+                    labelStyle: TextStyle(color: Colors.black87),
                   hintText: 'PR',
                   counterText: '',
                     focusedBorder: UnderlineInputBorder(

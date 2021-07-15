@@ -33,11 +33,13 @@ class _CepInputFieldState extends State<CepInputField> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           TextFormField(
+            cursorColor: Colors.brown,
             enabled: !cartManager.loading,
             controller: cepController,
             decoration: const InputDecoration(
               isDense: true,
               labelText: 'CEP',
+              labelStyle: TextStyle(color: Colors.black87),
               hintText: '12.345-678',
               ),
             inputFormatters: [

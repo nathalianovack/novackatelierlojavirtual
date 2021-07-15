@@ -15,8 +15,6 @@ class CartManager extends ChangeNotifier{
   CartManager cartManager;
   Order order;
 
- // Status status;
-
   List<CartProduct> items = [];
 
   User user;
@@ -212,21 +210,13 @@ class CartManager extends ChangeNotifier{
       loading = false;
       return;
     }
-
-    //TODO: PROCESSAR PAGAMENTO
-
     // Gerar o número do pedido
     final orderId = await _getOrderId();
-
-    //Gerar objeto pedido no firebase
-//    final order = Order();
-   // order = Order.fromCartManager(cartManager);
 
     final Order order = Order();
     order.orderId = orderId.toString();
     order.price = totalPrice;
     order.userId = user.id;
-    //order.status = status;
     order.status = 1;
 
     //salvar o pedido

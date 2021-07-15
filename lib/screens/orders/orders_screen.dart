@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:novackatelierlojavirtual/common/custom_drawer/custom_drawer.dart';
 import 'package:novackatelierlojavirtual/common/empty_card.dart';
-import 'package:novackatelierlojavirtual/common/login_card.dart';
+import 'package:novackatelierlojavirtual/common/login_card_orders.dart';
 import 'package:novackatelierlojavirtual/models/orders_manager.dart';
 import 'package:novackatelierlojavirtual/common/order_tile.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class OrdersScreen extends StatelessWidget {
       body: Consumer<OrdersManager>(
         builder: (_, ordersManager, __){
           if(ordersManager.user == null){
-            return LoginCard();
+            return LoginCardOrders();
           }
           if(ordersManager.orders.isEmpty){
             return EmptyCard(
